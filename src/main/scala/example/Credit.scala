@@ -50,7 +50,9 @@ object Credit {
     import sqlContext._
     import sqlContext.implicits._
 
-    val creditDF = parseRDD(sc.textFile("germancredit.csv")).map(parseCredit).toDF().cache()
+    val creditDF = parseRDD(sc.textFile("creditrisk/germancredit.csv")).map(parseCredit).toDF().cache()
+    // add register temp table to allow sql query
+    creditDF.registerTempTable("credit")
 
     creditDF.printSchema
 
@@ -137,4 +139,3 @@ object Credit {
 
   }
 }
-
